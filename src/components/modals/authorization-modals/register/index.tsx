@@ -4,19 +4,23 @@ import {LoadingOutlined} from "@ant-design/icons"
 import type {RegisterType} from "../../../../@types"
 import {useReduxDispatch, useReduxSelector} from "../../../../hooks/useRedux"
 import {setAuthorizationModalVisibility} from "../../../../redux/modal-slice"
+import {useRegister} from "../../../../hooks/useQuery/useQueryAction"
 
 // img
 import google from "../../../../assets/icons/google.svg"
 
 const Register = () => {
+    const {mutate} = useRegister()
+    const dispatch = useReduxDispatch()
     const {authorizationModalVisibility} = useReduxSelector(
         (state) => state.modalSlice
     )
-    const dispatch = useReduxDispatch()
 
     const onFinish = (e: RegisterType) => {
-        if (e.password !== e.confirm_password) return
         dispatch(setAuthorizationModalVisibility({open: true, isLoading: true}))
+
+        const {name, surname, email, password} = e
+        mutate({data: {name, surname, email, password}})
     }
 
     return (
@@ -25,7 +29,6 @@ const Register = () => {
                 name="basic"
                 onFinish={onFinish}
                 initialValues={{remember: true}}
-                autoComplete="off"
                 className="w-[100%] flex flex-col gap-[5px]">
                 <Form.Item<RegisterType>
                     name="name"

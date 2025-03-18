@@ -1,10 +1,6 @@
 import {Swiper, SwiperSlide} from "swiper/react"
 import {Autoplay, Pagination} from "swiper/modules"
 
-// import "swiper/css"
-// import "swiper/css/autoplay"
-// import "swiper/css/pagination"
-
 import {HeroSliderType} from "../../../@types"
 import {slider_data} from "../../../utils"
 

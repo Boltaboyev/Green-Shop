@@ -4,6 +4,7 @@ import {LoadingOutlined} from "@ant-design/icons"
 import type {FieldType} from "../../../../@types"
 import {useReduxDispatch, useReduxSelector} from "../../../../hooks/useRedux"
 import {setAuthorizationModalVisibility} from "../../../../redux/modal-slice"
+import {useLogin} from "../../../../hooks/useQuery/useQueryAction"
 
 // img
 import google from "../../../../assets/icons/google.svg"
@@ -14,9 +15,11 @@ const Login = () => {
     )
 
     const dispatch = useReduxDispatch()
+    const {mutate} = useLogin()
 
-    const onFinish = () => {
+    const onFinish = (e: FieldType) => {
         dispatch(setAuthorizationModalVisibility({open: true, isLoading: true}))
+        mutate({data: e})
     }
 
     return (
@@ -25,7 +28,6 @@ const Login = () => {
                 name="basic"
                 onFinish={onFinish}
                 initialValues={{remember: true}}
-                autoComplete="off"
                 className="w-[100%] flex flex-col gap-[5px]">
                 <Form.Item<FieldType>
                     name="email"

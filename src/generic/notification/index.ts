@@ -1,6 +1,6 @@
 import {notification} from "antd"
 
-type NotificationType = "login" | "register" | "password"
+type NotificationType = "login" | "register" | "password" | 406 | 409
 
 const notificationApi = () => {
     const notify = (props: NotificationType) => {
@@ -9,9 +9,13 @@ const notificationApi = () => {
                 return notification.success({message: "Login successfully"})
             case "register":
                 return notification.success({message: "Register successfully"})
-            case "password":
+            case 406:
                 return notification.error({
-                    message: "Confirm password is not match ! ",
+                    message: "The email already exists !",
+                })
+            case 409:
+                return notification.error({
+                    message: "Login or password wrong ! ",
                 })
             default:
                 break
