@@ -16,6 +16,8 @@ const Navbar = () => {
     const navigate = useNavigate()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
+    const user = JSON.parse(localStorage.getItem("user") as string)
+
     return (
         <>
             <header className="border-b border-[#00800043]">
@@ -89,18 +91,26 @@ const Navbar = () => {
                             </button>
                         </nav>
 
-                        <button
-                            onClick={() =>
-                                dispatch(
-                                    setAuthorizationModalVisibility({
-                                        open: true,
-                                        isLoading: false,
-                                    })
-                                )
-                            }
-                            className="bg-[#46a358] rounded-lg font-medium text-[#fff] p-[7px_25px]">
-                            Login
-                        </button>
+                        {!user ? (
+                            <button
+                                onClick={() => {
+                                    dispatch(
+                                        setAuthorizationModalVisibility({
+                                            open: true,
+                                            isLoading: false,
+                                        })
+                                    )
+                                    setIsSidebarOpen(false)
+                                }}
+                                className="bg-[#46a358] rounded-lg font-medium text-[#fff] p-[7px_25px]">
+                                Login
+                            </button>
+                        ) : (
+                            <button className="bg-[#46a358] rounded-lg font-medium text-[#fff] p-[7px_25px]">
+                                {user?.name[0].toUpperCase() +
+                                    user?.name.slice(1)}
+                            </button>
+                        )}
                     </nav>
 
                     <MenuOutlined
