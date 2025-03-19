@@ -4,7 +4,10 @@ import {LoadingOutlined} from "@ant-design/icons"
 import type {FieldType} from "../../../../@types"
 import {useReduxDispatch, useReduxSelector} from "../../../../hooks/useRedux"
 import {setAuthorizationModalVisibility} from "../../../../redux/modal-slice"
-import {useLogin} from "../../../../hooks/useQuery/useQueryAction"
+import {
+    useLogin,
+    useLoginWithGoogle,
+} from "../../../../hooks/useQuery/useQueryAction"
 
 // img
 import google from "../../../../assets/icons/google.svg"
@@ -21,6 +24,9 @@ const Login = () => {
         dispatch(setAuthorizationModalVisibility({open: true, isLoading: true}))
         mutate({data: e})
     }
+
+    const {mutate: mutateGoogle} = useLoginWithGoogle()
+    const signInGoogle = async () => mutateGoogle()
 
     return (
         <div className="px-[30px] flex flex-col gap-[15px] max-[600px]:p-0">
@@ -85,7 +91,9 @@ const Login = () => {
             </div>
 
             <div className="flex flex-col gap-[15px]">
-                <button className="font-medium text-[#727272] w-full h-[45px] rounded-lg border-[#EAEAEA] border flex items-center justify-center gap-[1rem]">
+                <button
+                    onClick={signInGoogle}
+                    className="font-medium text-[#727272] w-full h-[45px] rounded-lg border-[#EAEAEA] border flex items-center justify-center gap-[1rem]">
                     <img src={google} alt="google" />
                     Login with Google
                 </button>

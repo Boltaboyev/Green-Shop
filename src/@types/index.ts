@@ -22,27 +22,45 @@ export interface HeroSliderType {
     buttonText: string
 }
 
-export interface AuthUser {
-    _id?: string
-    email?: string
-    name?: string
-    surname?: string
-    profile_photo?: string
-    create_account_limit?: number
-    phone_number?: string
-    wishlist?: []
-    username?: string
-    country?: string
-    town?: string
-    street_address?: string
-    additional_street_address?: string
-    state?: string
-    zip?: string
-    followers?: string[]
-    permission?: {
-        create: boolean
-        update: boolean
-        delete: boolean
-        read: boolean
-    }
+export interface CategoryType {
+    count: number
+    created_at: string
+    created_by: string
+    route_path: string
+    title: string
+    _id: string
+}
+
+export interface QueryType<T> {
+    isLoading: boolean
+    isError: boolean
+    data?: T
+}
+
+export interface DiscountType {
+    _id: number
+    title: string
+    discoount_up_to: number
+    poster_image_url: string
+}
+
+export interface CartType {
+    category: string
+    comments: string[]
+    created_at: string
+    created_by: string
+    description: string
+    detailed_images: string[]
+    discount: boolean
+    discount_price: string
+    main_image: string
+    price: number
+    rate: number
+    short_description: string
+    sold_times: number
+    tags: string[]
+    title: string
+    views: number
+    __v: number
+    _id: string
 }

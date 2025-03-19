@@ -4,7 +4,10 @@ import {LoadingOutlined} from "@ant-design/icons"
 import type {RegisterType} from "../../../../@types"
 import {useReduxDispatch, useReduxSelector} from "../../../../hooks/useRedux"
 import {setAuthorizationModalVisibility} from "../../../../redux/modal-slice"
-import {useRegister} from "../../../../hooks/useQuery/useQueryAction"
+import {
+    useRegister,
+    useRegisterWithGoogle,
+} from "../../../../hooks/useQuery/useQueryAction"
 
 // img
 import google from "../../../../assets/icons/google.svg"
@@ -22,6 +25,8 @@ const Register = () => {
         const {name, surname, email, password} = e
         mutate({data: {name, surname, email, password}})
     }
+
+    const {mutate: registerWithGoogle} = useRegisterWithGoogle()
 
     return (
         <div className="px-[30px] flex flex-col gap-[15px] max-[600px]:p-0">
@@ -104,7 +109,9 @@ const Register = () => {
             </div>
 
             <div className="flex flex-col gap-[15px]">
-                <button className="font-medium text-[#727272] w-full h-[45px] rounded-lg border-[#EAEAEA] border flex items-center justify-center gap-[1rem]">
+                <button
+                    onClick={() => registerWithGoogle()}
+                    className="font-medium text-[#727272] w-full h-[45px] rounded-lg border-[#EAEAEA] border flex items-center justify-center gap-[1rem]">
                     <img src={google} alt="google" /> Register with Google
                 </button>
             </div>
