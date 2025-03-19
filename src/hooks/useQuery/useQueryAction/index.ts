@@ -5,7 +5,6 @@ import {setAuthorizationModalVisibility} from "../../../redux/modal-slice"
 import {notificationApi} from "../../../generic/notification"
 import {useReduxDispatch} from "../../useRedux"
 import {useAxios} from "../../useAxios"
-import {AuthUser} from "../../../@types"
 
 const useLogin = () => {
     const dispatch = useDispatch()
