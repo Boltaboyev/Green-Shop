@@ -6,11 +6,13 @@ import {notificationApi} from "../../../generic/notification"
 import {useReduxDispatch} from "../../useRedux"
 import {useAxios} from "../../useAxios"
 import {signWithGoogle} from "../../../config"
+import {cookieInfo} from "../../../generic/cookies"
 
 const useLogin = () => {
     const dispatch = useDispatch()
     const notify = notificationApi()
     const axios = useAxios()
+    const {setCookie} = cookieInfo()
 
     return useMutation({
         mutationFn: ({data}: {data: object}) =>
@@ -18,7 +20,7 @@ const useLogin = () => {
         onSuccess: (data) => {
             let {token, user} = data.data
             localStorage.setItem("token", token)
-            localStorage.setItem("user", JSON.stringify(user))
+            setCookie("user", user)
             dispatch(
                 setAuthorizationModalVisibility({open: false, isLoading: false})
             )
@@ -37,13 +39,15 @@ const useRegister = () => {
     const axios = useAxios()
     const notify = notificationApi()
     const dispatch = useReduxDispatch()
+    const {setCookie} = cookieInfo()
+
     return useMutation({
         mutationFn: ({data}: {data: object}) =>
             axios({url: "user/sign-up/", method: "POST", body: data}),
         onSuccess: (data) => {
             let {token, user} = data.data
             localStorage.setItem("token", token)
-            localStorage.setItem("user", JSON.stringify(user))
+            setCookie("user", user)
             dispatch(
                 setAuthorizationModalVisibility({open: false, isLoading: false})
             )
@@ -62,6 +66,7 @@ const useRegister = () => {
 const useLoginWithGoogle = () => {
     const dispatch = useDispatch()
     const notify = notificationApi()
+    const {setCookie} = cookieInfo()
 
     const axios = useAxios()
     return useMutation({
@@ -76,7 +81,7 @@ const useLoginWithGoogle = () => {
         onSuccess: (data) => {
             let {token, user} = data.data
             localStorage.setItem("token", token)
-            localStorage.setItem("user", JSON.stringify(user))
+            setCookie("user", user)
             dispatch(
                 setAuthorizationModalVisibility({open: false, isLoading: false})
             )
@@ -95,6 +100,8 @@ const useRegisterWithGoogle = () => {
     const axios = useAxios()
     const notify = notificationApi()
     const dispatch = useReduxDispatch()
+    const {setCookie} = cookieInfo()
+
     return useMutation({
         mutationFn: async () => {
             const response = await signWithGoogle()
@@ -107,7 +114,8 @@ const useRegisterWithGoogle = () => {
         onSuccess: (data) => {
             let {token, user} = data.data
             localStorage.setItem("token", token)
-            localStorage.setItem("user", JSON.stringify(user))
+            setCookie("user", user)
+
             dispatch(
                 setAuthorizationModalVisibility({open: false, isLoading: false})
             )

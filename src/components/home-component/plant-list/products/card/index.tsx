@@ -11,7 +11,7 @@ const Card: FC<CartType> = (props) => {
     const navigate = useNavigate()
 
     return (
-        <div className="flex flex-col gap-[0.6rem] max-[350px]:border max-[350px]:p-[15px] rounded-lg max-[350px]:border-[#399e3973]">
+        <div className="flex flex-col gap-[0.6rem] max-[350px]:border max-[350px]:p-[15px] border-t border-transparent hover:border-[#46A358] rounded-lg max-[350px]:border-[#399e3973]">
             <div className=" bg-[#f2f2f2] flex justify-center items-center transition *:duration-400 relative group rounded-md overflow-hidden">
                 <div className="flex justify-center items-center h-[250px] overflow-hidden p-[10px] max-[500px]:h-[170px]">
                     <img

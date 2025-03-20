@@ -10,13 +10,15 @@ import logo from "../../assets/icons/logo.svg"
 import searchLogo from "../../assets/icons/search-icon.svg"
 import cartLogo from "../../assets/icons/cart.svg"
 import {BellOutlined, CloseOutlined, MenuOutlined} from "@ant-design/icons"
+import {cookieInfo} from "../../generic/cookies"
 
 const Navbar = () => {
     const dispatch = useReduxDispatch()
     const navigate = useNavigate()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-    const user = JSON.parse(localStorage.getItem("user") as string)
+    const {getCookie} = cookieInfo()
+    let user = getCookie("user")
 
     return (
         <>

@@ -1,4 +1,4 @@
-import {HeroSliderType} from "../@types"
+import {HeroSliderType, TitleCategoryType} from "../@types"
 
 export const slider_data: HeroSliderType[] = [
     {
@@ -38,3 +38,23 @@ export const slider_data: HeroSliderType[] = [
             "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fflower2.png?alt=media&token=905a94e2-1250-4e56-9dcb-d16bbb1a31ca",
     },
 ]
+
+
+
+export const title_category: TitleCategoryType[] = [
+    {
+        id: 1,
+        title: "All Plants",
+        label: "all-plants",
+    },
+    {
+        id: 2,
+        title: "New Arrivals",
+        label: "new-arrivals",
+    },
+    {
+        id: 3,
+        title: "Sale",
+        label: "sale",
+    }
+]  

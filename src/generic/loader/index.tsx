@@ -19,7 +19,16 @@ const Loader = () => {
         )
     }
 
-    return {category_loader, discount_loader}
+    const card_loader = () => {
+        return Array.from({length: 9}).map((_, idx) => (
+            <div key={idx} className="flex flex-col gap-[10px]">
+                <Skeleton.Image className="!w-full !h-[250px]" />
+                <Skeleton.Input />
+            </div>
+        ))
+    }
+
+    return {category_loader, discount_loader, card_loader}
 }
 
 export default Loader
