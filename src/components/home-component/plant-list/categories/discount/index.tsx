@@ -1,14 +1,13 @@
-import type {DiscountType, QueryType} from "../../../../../@types"
+import type {DiscountType, QueryType2} from "../../../../../@types"
 import Loader from "../../../../../generic/loader"
 import {useQueryHandler} from "../../../../../hooks/useQuery"
 
 const Discount = () => {
-    const {data, isLoading, isError}: QueryType<DiscountType> = useQueryHandler(
-        {
+    const {data, isLoading, isError}: QueryType2<DiscountType> =
+        useQueryHandler({
             url: "features/discount",
             pathname: "discount",
-        }
-    )
+        })
 
     const {discount_loader} = Loader()
     return (

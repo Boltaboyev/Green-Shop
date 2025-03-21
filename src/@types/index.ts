@@ -37,6 +37,12 @@ export interface QueryType {
     data?: CartType
 }
 
+export interface QueryType2<T> {
+    isLoading: boolean
+    isError: boolean
+    data?: T
+}
+
 export interface DiscountType {
     _id: number
     title: string
