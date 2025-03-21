@@ -29,7 +29,12 @@ const Card: FC<CartType> = (props) => {
                         <HeartOutlined />
                     </button>
 
-                    <button onClick={() => navigate(`/detail/${props._id}`)}>
+                    <button
+                        onClick={() =>
+                            navigate(
+                                `/plant-info/${props.category}/${props._id}`
+                            )
+                        }>
                         <FiSearch />
                     </button>
                 </div>

@@ -28,7 +28,17 @@ const Loader = () => {
         ))
     }
 
-    return {category_loader, discount_loader, card_loader}
+    const image_loading = () => {
+        return Array.from({length: 4}).map((_, idx) => (
+            <Skeleton.Image
+                key={idx}
+                active
+                className="!w-[90px] !h-[90px] max-[600px]:!h-[60px] max-[600px]:!w-[60px]"
+            />
+        ))
+    }
+
+    return {category_loader, discount_loader, card_loader, image_loading}
 }
 
 export default Loader

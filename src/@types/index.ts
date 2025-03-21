@@ -31,10 +31,10 @@ export interface CategoryType {
     _id: string
 }
 
-export interface QueryType<T> {
+export interface QueryType {
     isLoading: boolean
     isError: boolean
-    data?: T
+    data?: CartType
 }
 
 export interface DiscountType {
