@@ -16,30 +16,36 @@ const notificationApi = () => {
     const notify = (props: NotificationType) => {
         switch (props) {
             case "login":
-                return notification.success({message: "Login successfully"})
+                return notification.success({message: "Logged in successfully"})
             case "register":
-                return notification.success({message: "Register successfully"})
+                return notification.success({
+                    message: "Registered successfully",
+                })
             case 406:
                 return notification.error({
-                    message: "The email already exists !",
+                    message: "This email already exists !",
                 })
             case 409:
                 return notification.error({
-                    message: "Login or password wrong ! ",
+                    message: "Incorrect login or password ! ",
                 })
             case "coupon":
-                return notification.error({message: "Place eneter coupon"})
+                return notification.info({
+                    message: "Please enter a coupon code",
+                })
             case "coupon_404":
-                return notification.error({message: "Coupon is not defined !"})
+                return notification.error({message: "Coupon not found !"})
             case "success_coupon":
-                return notification.success({message: "Coupon success !"})
+                return notification.success({
+                    message: "Coupon successfully applied",
+                })
             case "add":
                 return notification.success({
-                    message: "Added to cart",
+                    message: "Product added to cart",
                 })
             case "delete":
-                return notification.success({
-                    message: "Deleted from cart !",
+                return notification.info({
+                    message: "Removed from cart !",
                 })
             default:
                 break

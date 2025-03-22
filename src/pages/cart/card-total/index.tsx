@@ -25,7 +25,7 @@ const CardTotal = () => {
 
     return (
         <div>
-            <h3 className="pb-5 text-[#3D3D3D] border-b border-[#46A358] font-bold text-[18px]">
+            <h3 className="text-[#3D3D3D] text-[16px] font-medium pb-3 border-b border-[#46a3598c] mb-[20px]">
                 Card Total
             </h3>
             <Form onFinish={getCoupon} className="flex h-[40px] mt-[35px]">

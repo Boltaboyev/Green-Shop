@@ -1,6 +1,6 @@
 import type {FC} from "react"
+
 import {CartType} from "../../../../@types"
-import {DeleteFilled} from "@ant-design/icons"
 import {useReduxDispatch} from "../../../../hooks/useRedux"
 import {
     decrement,
@@ -8,6 +8,9 @@ import {
     increment,
 } from "../../../../redux/shop-slice"
 import {notificationApi} from "../../../../generic/notification"
+
+// icons
+import {LuTrash} from "react-icons/lu"
 
 const ShoppingCard: FC<CartType> = ({
     main_image,
@@ -21,20 +24,29 @@ const ShoppingCard: FC<CartType> = ({
     const notify = notificationApi()
     const disable = Number(count) <= 1 ? true : false
     return (
-        <div className="my-5 bg-[#eee] p-2 flex items-center justify-between rounded-sm">
-            <div className="flex items-center gap-4 w-[40%]">
-                <img className="w-[70px] h-[70px]" src={main_image} alt="" />
-                <div>
-                    <h3 className="text-[16px] font-medium">{title}</h3>
-                    <p className="text-[14px] font-normal pt-[10px] max-sm:text-[12px] ">
-                        <span className="text-[#A5A5A5]">SKU: </span> {_id}
+        <div className="grid grid-cols-[2.5fr_1fr_1fr_1fr] items-center bg-[#eeeeee6d] p-2 rounded-md relative">
+            <div className="flex items-center gap-4">
+                <img
+                    className="w-[70px] h-[70px] object-contain"
+                    src={main_image}
+                    alt=""
+                />
+                <div className="flex flex-col  gap-1">
+                    <h3 className="text-[16px] font-medium text-[#3d3d3d]">
+                        {title}
+                    </h3>
+                    <p className="text-[13px] font-normal flex justify-center items-center gap-[5px]">
+                        <span className="text-[#A5A5A5]">SKU: </span>{" "}
+                        <p className="text-[#3d3d3db5]">{_id}</p>
                     </p>
                 </div>
             </div>
-            <div className="text-[#727272] text-[16px] font-medium  w-[20%]">
+
+            <div className="text-[#727272] text-[16px] font-medium ">
                 ${price}
             </div>
-            <div className="flex items-center gap-3  w-[20%]">
+
+            <div className="flex items-center gap-2">
                 <button
                     disabled={disable}
                     onClick={() => dispatch(decrement(_id))}
@@ -48,15 +60,17 @@ const ShoppingCard: FC<CartType> = ({
                     +
                 </button>
             </div>
-            <div className="text-[#727272] text-[16px] font-medium   w-[20%]">
+
+            <div className="text-[#45a358] text-[18px] font-medium">
                 ${Number(userPrice).toFixed(2)}
             </div>
-            <DeleteFilled
+
+            <LuTrash
                 onClick={() => {
                     dispatch(deleteShopCard(_id))
                     notify("delete")
                 }}
-                className="text-[#727272] text-[20px]"
+                className="text-[#727272] text-[20px] absolute right-3 cursor-pointer hover:text-[#46A358]"
             />
         </div>
     )
