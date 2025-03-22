@@ -1,17 +1,17 @@
-import {Form} from "antd"
-import {Link} from "react-router-dom"
-import {useReduxSelector} from "../../../hooks/useRedux"
+import {useNavigate} from "react-router-dom"
 import {useRef} from "react"
-import {notificationApi} from "../../../generic/notification"
-import {CheckOutlined, LoadingOutlined} from "@ant-design/icons"
-import PricesTotal from "./prices"
+import {Form} from "antd"
+
 import {useGetCoupon} from "../../../hooks/useQuery/useQueryAction"
+import {CheckOutlined, LoadingOutlined} from "@ant-design/icons"
+import {notificationApi} from "../../../generic/notification"
+import {useReduxSelector} from "../../../hooks/useRedux"
+import PricesTotal from "./prices"
 
 const CardTotal = () => {
+    const {isLoading, coupon} = useReduxSelector((state) => state.couponSlice)
     const inputRef = useRef<HTMLInputElement>(null)
     const notify = notificationApi()
-    const {isLoading, coupon} = useReduxSelector((state) => state.couponSlice)
-
     const {mutate} = useGetCoupon()
 
     const getCoupon = () => {
@@ -23,12 +23,14 @@ const CardTotal = () => {
         mutate(newDataCoupon)
     }
 
+    const navigate = useNavigate()
+
     return (
         <div>
             <h3 className="text-[#3D3D3D] text-[16px] font-medium pb-3 border-b border-[#46a3598c] mb-[20px]">
-                Card Total
+                Cart Total
             </h3>
-            <Form onFinish={getCoupon} className="flex h-[40px] mt-[35px]">
+            <Form onFinish={getCoupon} className="flex h-[40px]">
                 <input
                     disabled={coupon ? true : false}
                     ref={inputRef}
@@ -48,16 +50,20 @@ const CardTotal = () => {
                     )}
                 </button>
             </Form>
+
             <PricesTotal />
 
-            <button className="bg-[#46A358] flex rounded-md items-center justify-center gap-1 text-base text-white w-full h-[40px] mt-[30px]">
-                Proceed To Checkout
-            </button>
-            <Link to={"/"} className="flex justify-center">
-                <button className="mt-[14px] text-[#46A358] cursor-pointer">
+            <div className="flex flex-col gap-[10px] mt-6">
+                <button className="bg-[#46A358] flex rounded-md items-center justify-center gap-1 text-base text-white w-full h-[40px]">
+                    Proceed To Checkout
+                </button>
+
+                <button
+                    onClick={() => navigate("/")}
+                    className="bg-[#46a3591e] flex rounded-md items-center justify-center gap-1 text-base text-[#46a358] w-full h-[40px]">
                     Continue Shopping
                 </button>
-            </Link>
+            </div>
         </div>
     )
 }

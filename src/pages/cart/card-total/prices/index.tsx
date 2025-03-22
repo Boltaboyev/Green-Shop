@@ -7,8 +7,9 @@ const PricesTotal = () => {
         (acc, value) => (acc += Number(value.userPrice)),
         0
     )
-    const coupon_title_style = "text-[#3D3D3D] text-[15px] font-normal"
+    const coupon_title_style = "text-[#3D3D3D] text-[14px] font-medium"
     const discount_price: number = (total_price * coupon) / 100
+
     return (
         <div>
             <div className="mt-[20px]">
@@ -21,7 +22,6 @@ const PricesTotal = () => {
                 <div className="flex justify-between items-center pt-3">
                     <h3 className={`${coupon_title_style}`}>Coupon Discount</h3>
                     <h2 className="text-[#3D3D3D] text-[15px]">
-                        {" "}
                         {discount_price.toFixed(2)}$
                     </h2>
                 </div>
@@ -34,8 +34,8 @@ const PricesTotal = () => {
             </div>
             <div>
                 <div className="flex justify-between mt-[20px]">
-                    <h2 className="text-[#3D3D3D] text-[16px] font-bold">
-                        Total:
+                    <h2 className="text-[#3D3D3D] text-[17px] font-bold">
+                        Total
                     </h2>
                     <div>
                         <h1
