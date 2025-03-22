@@ -1,7 +1,7 @@
 // img
-import icon1 from "../../../../assets/img/footer-icon/1.png"
-import icon2 from "../../../../assets/img/footer-icon/2.png"
-import icon3 from "../../../../assets/img/footer-icon/3.png"
+import icon1 from "../../../assets/img/footer-icon/1.png"
+import icon2 from "../../../assets/img/footer-icon/2.png"
+import icon3 from "../../../assets/img/footer-icon/3.png"
 
 const FooterTop = () => {
     return (

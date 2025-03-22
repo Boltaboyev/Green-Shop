@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom"
 import {Badge} from "antd"
 
 import {setAuthorizationModalVisibility} from "../../redux/modal-slice"
-import {useReduxDispatch} from "../../hooks/useRedux"
+import {useReduxDispatch, useReduxSelector} from "../../hooks/useRedux"
 
 // icons
 import logo from "../../assets/icons/logo.svg"
@@ -19,6 +19,8 @@ const Navbar = () => {
 
     const {getCookie} = cookieInfo()
     let user = getCookie("user")
+
+    const {shop} = useReduxSelector((state) => state.shopSlice)
 
     return (
         <>
@@ -79,8 +81,12 @@ const Navbar = () => {
                                 </p>
                             </button>
 
-                            <button className="max-[600px]:flex justify-center items-center gap-[10px]">
-                                <Badge count={0} showZero={false}>
+                            <button
+                                onClick={() => navigate("/products-shop")}
+                                className="max-[600px]:flex justify-center items-center gap-[10px]">
+                                <Badge
+                                    count={shop.length || 0}
+                                    showZero={false}>
                                     <img
                                         src={cartLogo}
                                         alt="cart"

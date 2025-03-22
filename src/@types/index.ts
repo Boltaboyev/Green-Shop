@@ -69,10 +69,19 @@ export interface CartType {
     views: number
     __v: number
     _id: string
+    count?: number
+    userPrice?: number
 }
 
 export interface TitleCategoryType {
     id: number
     title: string
     label: string
+}
+
+export interface CouponType {
+    code: string
+    discount_for: number
+    id: number
+    title: string
 }

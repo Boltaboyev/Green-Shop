@@ -10,8 +10,6 @@ const ShopInfo: FC<QueryType> = ({data, isLoading, isError}) => {
     const size_Style =
         "w-[22px] h-[22px] flex justify-center items-center border border-[#EAEAEA] rounded-full hover:border-[#46A358] transition-colors font-medium text-[12px] p-3"
 
-    console.log(data?.rate)
-
     return (
         <div>
             <div className="border-b pb-5  border-[#A6D1Ac] flex items-end justify-between max-[460px]:flex-col max-[460px]:items-start max-[460px]:gap-4">

@@ -7,6 +7,8 @@ import {useReduxDispatch} from "../../useRedux"
 import {useAxios} from "../../useAxios"
 import {signWithGoogle} from "../../../config"
 import {cookieInfo} from "../../../generic/cookies"
+import {setCoupon, setIsLoading} from "../../../redux/coupon-slice"
+import {CouponType} from "../../../@types"
 
 const useLogin = () => {
     const dispatch = useDispatch()
@@ -131,4 +133,34 @@ const useRegisterWithGoogle = () => {
     })
 }
 
-export {useLogin, useRegister, useRegisterWithGoogle, useLoginWithGoogle}
+const useGetCoupon = () => {
+    const axios = useAxios()
+    const notify = notificationApi()
+    const dispatch = useReduxDispatch()
+    return useMutation({
+        mutationFn: (data: object) => {
+            dispatch(setIsLoading(true))
+            return axios({
+                url: "/features/coupon",
+                params: data,
+            })
+        },
+        onSuccess: (data: CouponType) => {
+            notify("success_coupon")
+            dispatch(setIsLoading(false))
+            dispatch(setCoupon(data.discount_for))
+        },
+        onError: () => {
+            notify("coupon_404")
+            dispatch(setIsLoading(false))
+        },
+    })
+}
+
+export {
+    useLogin,
+    useRegister,
+    useRegisterWithGoogle,
+    useLoginWithGoogle,
+    useGetCoupon,
+}
