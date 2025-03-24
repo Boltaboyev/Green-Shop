@@ -10,6 +10,7 @@ import PricesTotal from "./prices"
 
 const CardTotal = () => {
     const {isLoading, coupon} = useReduxSelector((state) => state.couponSlice)
+    const {shop} = useReduxSelector((state) => state.shopSlice)
     const inputRef = useRef<HTMLInputElement>(null)
     const notify = notificationApi()
     const {mutate} = useGetCoupon()
@@ -54,7 +55,13 @@ const CardTotal = () => {
             <PricesTotal />
 
             <div className="flex flex-col gap-[10px] mt-6">
-                <button className="bg-[#46A358] flex rounded-md items-center justify-center gap-1 text-base text-white w-full h-[40px]">
+                <button
+                    onClick={() =>
+                        shop.length
+                            ? navigate("/product-checkout")
+                            : notify("shop_not")
+                    }
+                    className="bg-[#46A358] flex rounded-md items-center justify-center gap-1 text-base text-white w-full h-[40px]">
                     Proceed To Checkout
                 </button>
 

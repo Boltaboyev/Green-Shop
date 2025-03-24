@@ -85,3 +85,38 @@ export interface CouponType {
     id: number
     title: string
 }
+
+export interface AuthUser<T> {
+    _id?: string
+    email?: string
+    name?: string
+    surname?: string
+    profile_photo?: string
+    create_account_limit?: number
+    phone_number?: string
+    wishlist?: T
+    username?: string
+    billing_address?: T
+    followers?: string[]
+    permission?: {
+        create: boolean
+        update: boolean
+        delete: boolean
+        read: boolean
+    }
+}
+
+export interface MakeOrderType {
+    name: string
+    surname: string
+    country: string
+    street: string
+    state: string
+    email: string
+    zip: string
+    appartment: string
+    town: string
+    phone_number: string
+    comment: string
+    payment_method: string
+}

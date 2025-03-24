@@ -1,7 +1,10 @@
 import {useMutation} from "react-query"
 import {useDispatch} from "react-redux"
 
-import {setAuthorizationModalVisibility} from "../../../redux/modal-slice"
+import {
+    setAuthorizationModalVisibility,
+    setOrderModalVisibility,
+} from "../../../redux/modal-slice"
 import {notificationApi} from "../../../generic/notification"
 import {useReduxDispatch} from "../../useRedux"
 import {useAxios} from "../../useAxios"
@@ -157,10 +160,29 @@ const useGetCoupon = () => {
     })
 }
 
+const useMakeOrderQuery = () => {
+    const axios = useAxios()
+    const dispatch = useReduxDispatch()
+    return useMutation({
+        mutationFn: (data: object) => {
+            dispatch(setOrderModalVisibility({open: false, isLoading: true}))
+            return axios({
+                url: "/order/make-order",
+                method: "POST",
+                body: {...data},
+            })
+        },
+        onSuccess: () => {
+            dispatch(setOrderModalVisibility({open: true, isLoading: false}))
+        },
+    })
+}
+
 export {
     useLogin,
     useRegister,
     useRegisterWithGoogle,
     useLoginWithGoogle,
     useGetCoupon,
+    useMakeOrderQuery,
 }

@@ -11,6 +11,7 @@ type NotificationType =
     | "success_coupon"
     | "add"
     | "delete"
+    | "shop_not"
 
 const notificationApi = () => {
     const notify = (props: NotificationType) => {
@@ -65,6 +66,8 @@ const notificationApi = () => {
                     duration: 1,
                     placement: "top",
                 })
+            case "shop_not":
+                return notification.error({message: "Please place an order !"})
             default:
                 break
         }
