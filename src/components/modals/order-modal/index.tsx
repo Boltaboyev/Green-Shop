@@ -1,23 +1,19 @@
 import {Modal} from "antd"
+
 import {useReduxDispatch, useReduxSelector} from "../../../hooks/useRedux"
-import CheckData from "../../product-checkout/orders-product/card"
 import {setOrderModalVisibility} from "../../../redux/modal-slice"
-import {useNavigate} from "react-router-dom"
+import CheckData from "../../product-checkout/orders-product/card"
 
 const OrderModal = () => {
-    const {orderModalVisibility} = useReduxSelector(
-        (state) => state.modalSlice
-    )
+    const {orderModalVisibility} = useReduxSelector((state) => state.modalSlice)
     const {shop} = useReduxSelector((state) => state.shopSlice)
     const total_price = shop.reduce(
         (acc, value) => (acc += Number(value.userPrice)),
         16
     )
     const dispatch = useReduxDispatch()
-    const navigate = useNavigate()
     const closeModal = () => {
         dispatch(setOrderModalVisibility({open: false, isLoading: false}))
-        navigate("/profile/track-order")
     }
 
     return (
@@ -76,9 +72,7 @@ const OrderModal = () => {
                 <br />
                 items.
             </p>
-            <button
-                onClick={() => navigate("/profile/track-order")}
-                className="bg-[#46A358] flex rounded-md items-center justify-center gap-1 text-base text-white m-auto mt-[50px] w-[145px] h-[45px]">
+            <button className="bg-[#46A358] flex rounded-md items-center justify-center gap-1 text-base text-white m-auto mt-[50px] w-[145px] h-[45px]">
                 Track your order
             </button>
         </Modal>
