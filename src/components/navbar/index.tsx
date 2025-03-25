@@ -1,5 +1,5 @@
 import {useState} from "react"
-import {Link, useNavigate} from "react-router-dom"
+import {Link, NavLink, useNavigate} from "react-router-dom"
 import {Badge} from "antd"
 
 import {setAuthorizationModalVisibility} from "../../redux/modal-slice"
@@ -30,13 +30,9 @@ const Navbar = () => {
                         <img src={logo} alt="" />
                     </Link>
 
-                    <nav className="font-medium *:cursor-pointer text-[#3D3D3D] flex justify-center items-center gap-[30px] max-[600px]:hidden">
-                        <h3
-                            onClick={() => navigate("/")}
-                            className="text-[#46A358]">
-                            Home
-                        </h3>
-                        <h3>Blog</h3>
+                    <nav className="navbarLinks font-medium *:cursor-pointer text-[#3D3D3D] flex justify-center items-center gap-[30px] max-[600px]:hidden">
+                        <NavLink to={"/"}>Home</NavLink>
+                        <NavLink to={"/blog"}>Blog</NavLink>
                     </nav>
 
                     <nav
@@ -56,13 +52,9 @@ const Navbar = () => {
                             className="max-[600px]:block hidden"
                         />
 
-                        <nav className="font-medium *:cursor-pointer text-[#3D3D3D] hidden justify-center items-center gap-[30px] max-[600px]:flex flex-col">
-                            <h3
-                                onClick={() => navigate("/")}
-                                className="text-[#46A358]">
-                                Home
-                            </h3>
-                            <h3>Blog</h3>
+                        <nav className="navbarLinks font-medium *:cursor-pointer text-[#3D3D3D] hidden justify-center items-center gap-[30px] max-[600px]:flex flex-col">
+                            <NavLink to={"/"}>Home</NavLink>
+                            <NavLink to={"/blog"}>Blog</NavLink>
                         </nav>
 
                         <nav className="flex justify-center items-center gap-[25px] *:cursor-pointer max-[600px]:flex-col max-[600px]:items-start ">

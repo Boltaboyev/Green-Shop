@@ -63,3 +63,8 @@ button:active {
 .ant-select-selector {
     border-color: #46a358 !important;
 }
+
+
+.navbarLinks .active {
+    color: #46a358;
+}

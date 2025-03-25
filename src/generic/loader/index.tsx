@@ -38,7 +38,56 @@ const Loader = () => {
         ))
     }
 
-    return {category_loader, discount_loader, card_loader, image_loading}
+    const blog_loader = () => {
+        return Array.from({length: 6}).map((_, idx) => (
+            <div key={idx}>
+                <Skeleton.Input
+                    active
+                    className="my-[15px] !h-[25px] !w-[70%]"
+                />
+                {Array.from({length: 6}).map((_, idx) => (
+                    <Skeleton.Input
+                        key={idx}
+                        active
+                        className="!w-full my-[5px] !h-[20px]"
+                    />
+                ))}
+            </div>
+        ))
+    }
+
+    const blog_userPostLoader = () => {
+        return (
+            <div>
+                <div className="flex gap-4">
+                    <Skeleton.Avatar active />
+                    <Skeleton.Input active />
+                </div>
+                <div>
+                    <Skeleton.Input
+                        active
+                        className="my-[15px] !h-[25px] !w-[70%]"
+                    />
+                    {Array.from({length: 10}).map((_, idx) => (
+                        <Skeleton.Input
+                            key={idx}
+                            active
+                            className="!w-full my-[10px] !h-[20px]"
+                        />
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    return {
+        category_loader,
+        discount_loader,
+        card_loader,
+        image_loading,
+        blog_loader,
+        blog_userPostLoader,
+    }
 }
 
 export default Loader
