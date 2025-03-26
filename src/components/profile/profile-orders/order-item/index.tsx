@@ -4,22 +4,18 @@ const OrderItem = (data: OrderType) => {
     return (
         <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr] justify-between mt-2 bg-[#f5f4f4c4] p-4 rounded-xl">
             <div>
-                <p>Order Number</p>
-                <h2 className="font-bold">{data._id}</h2>
+                <h2 className="text-[#3d3d3d]">{data._id}</h2>
             </div>
             <div>
-                <p>Date</p>
-                <h2 className="font-bold">{data.created_at.slice(0, 10)}</h2>
+                <h2 className="font-medium">{data.created_at.slice(0, 10)}</h2>
             </div>
             <div>
-                <p>Total</p>
-                <h2 className="font-bold">
+                <h2 className="font-medium text-[#46a358]">
                     $ {data?.extra_shop_info.total?.toFixed(2)}
                 </h2>
             </div>
             <div>
-                <p>More</p>
-                <button className="text-[rgb(69,163,88)]">More details</button>
+                <button className="text-[#46a358] hover:underline">More details</button>
             </div>
         </div>
     )
