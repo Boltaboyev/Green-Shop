@@ -14,9 +14,6 @@ const TrackProfileOrders = () => {
             url: "/order/get-order",
         })
 
-        console.log(data);
-        
-
     const filteredOrders = data ? data.slice(1, 15) : []
 
     return (
