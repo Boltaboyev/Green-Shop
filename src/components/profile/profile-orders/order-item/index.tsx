@@ -15,7 +15,7 @@ const OrderItem = (data: OrderType) => {
                 </h2>
             </div>
             <div>
-                <button className="text-[#46a358] hover:underline">More details</button>
+                <button className="text-[#46a358] hover:underline">More info</button>
             </div>
         </div>
     )
