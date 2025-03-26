@@ -13,6 +13,7 @@ interface OrderModalType {
 interface initialStateType {
     authorizationModalVisibility: ModalAuthorizationType
     orderModalVisibility: OrderModalType
+    orderDetailVisibility: boolean
 }
 
 const initialState: initialStateType = {
@@ -24,6 +25,7 @@ const initialState: initialStateType = {
         open: false,
         isLoading: false,
     },
+    orderDetailVisibility: false,
 }
 
 const modalSlice = createSlice({
@@ -36,9 +38,15 @@ const modalSlice = createSlice({
         setOrderModalVisibility(state, {payload}) {
             state.orderModalVisibility = payload
         },
+        setOrderDetailsVisibility(state) {
+            state.orderDetailVisibility = !state.orderDetailVisibility
+        },
     },
 })
 
-export const {setAuthorizationModalVisibility, setOrderModalVisibility} =
-    modalSlice.actions
+export const {
+    setAuthorizationModalVisibility,
+    setOrderModalVisibility,
+    setOrderDetailsVisibility,
+} = modalSlice.actions
 export default modalSlice.reducer

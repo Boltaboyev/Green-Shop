@@ -8,7 +8,12 @@ export const cookieInfo = () => {
     const setCookie = (key: string, data: string) => {
         return Cookies.set(key, JSON.stringify(data))
     }
+
+    const removeCookie = (key: string) => {
+        return Cookies.remove(key)
+    }
+
     const isAuthorization = getCookie("user") ? true : false
 
-    return {getCookie, isAuthorization, setCookie}
+    return {isAuthorization, getCookie, setCookie, removeCookie}
 }

@@ -148,3 +148,24 @@ export interface UserTypeApi {
     isLoading: boolean
     isError: boolean
 }
+
+interface BillingAddress {
+    country?: string
+    town?: string
+    street_address?: string
+    additional_street_address?: string
+    state?: string
+    zip?: string
+}
+
+export interface OrderType {
+    billing_address: BillingAddress
+    created_at: string
+    created_by: string
+    extra_shop_info: {
+        total: number
+        method: string
+    }
+    shop_list: CartType[]
+    _id: string
+}

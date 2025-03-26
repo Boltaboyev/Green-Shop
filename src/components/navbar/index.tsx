@@ -106,7 +106,7 @@ const Navbar = () => {
                                 Login
                             </button>
                         ) : (
-                            <button className="bg-[#46a358] rounded-lg font-medium text-[#fff] p-[7px_25px]">
+                            <button onClick={()=> navigate("/profile")} className="bg-[#46a358] rounded-lg font-medium text-[#fff] p-[7px_25px]">
                                 {user?.name[0].toUpperCase() +
                                     user?.name.slice(1)}
                             </button>

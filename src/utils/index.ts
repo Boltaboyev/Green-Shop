@@ -39,8 +39,6 @@ export const slider_data: HeroSliderType[] = [
     },
 ]
 
-
-
 export const title_category: TitleCategoryType[] = [
     {
         id: 1,
@@ -56,5 +54,5 @@ export const title_category: TitleCategoryType[] = [
         id: 3,
         title: "Sale",
         label: "sale",
-    }
-]  
+    },
+]
