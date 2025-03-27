@@ -1,0 +1,15 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/static/*",
+            "destination": "/static/:path*",
+            "permanent": true
+        }
+    ]
+}

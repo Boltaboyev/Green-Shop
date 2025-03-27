@@ -3,6 +3,7 @@ import {notification} from "antd"
 type NotificationType =
     | "login"
     | "register"
+    | "auth_error"
     | "password"
     | 406
     | 409
@@ -25,6 +26,12 @@ const notificationApi = () => {
             case "register":
                 return notification.success({
                     message: "Registered successfully",
+                    duration: 1,
+                    placement: "top",
+                })
+            case "auth_error":
+                return notification.error({
+                    message: "Something went wrong !",
                     duration: 1,
                     placement: "top",
                 })

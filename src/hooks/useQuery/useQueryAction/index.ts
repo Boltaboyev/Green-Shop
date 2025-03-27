@@ -32,7 +32,11 @@ const useLogin = () => {
             notify("login")
         },
         onError: (error: {status: number}) => {
-            if (error.status === 409) notify(409)
+            if (error.status === 409) {
+                notify(409)
+            } else {
+                notify("auth_error")
+            }
             dispatch(
                 setAuthorizationModalVisibility({open: true, isLoading: false})
             )
@@ -59,7 +63,11 @@ const useRegister = () => {
             notify("register")
         },
         onError: (error: {status: 406}) => {
-            if (error.status === 406) notify(error.status)
+            if (error.status === 406) {
+                notify(error.status)
+            } else {
+                notify("auth_error")
+            }
             dispatch(
                 setAuthorizationModalVisibility({open: true, isLoading: false})
             )
@@ -93,7 +101,11 @@ const useLoginWithGoogle = () => {
             notify("login")
         },
         onError: (error: {status: 409}) => {
-            if (error.status === 409) notify(409)
+            if (error.status === 409) {
+                notify(409)
+            } else {
+                notify("auth_error")
+            }
             dispatch(
                 setAuthorizationModalVisibility({open: true, isLoading: false})
             )
@@ -126,8 +138,7 @@ const useRegisterWithGoogle = () => {
             )
             notify("register")
         },
-        onError: (error) => {
-            console.log(error)
+        onError: () => {
             dispatch(
                 setAuthorizationModalVisibility({open: true, isLoading: false})
             )
