@@ -8,6 +8,7 @@ import ProductCheckout from "../pages/product-checkout"
 import Blog from "../pages/blog"
 import UserPostBlog from "../components/blog/blog-userPost"
 import PrivateRoute from "./private"
+import User from "../pages/user"
 
 export const root = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ export const root = createBrowserRouter([
             {
                 path: "/profile",
                 element: <PrivateRoute />,
+            },
+            {
+                path: "/user/:id",
+                element: <User />,
             },
         ],
     },

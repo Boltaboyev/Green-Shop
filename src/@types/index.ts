@@ -169,3 +169,9 @@ export interface OrderType {
     shop_list: CartType[]
     _id: string
 }
+
+export interface UserBodyTitleType {
+    id: string
+    title: string
+    Component: React.FC
+}
