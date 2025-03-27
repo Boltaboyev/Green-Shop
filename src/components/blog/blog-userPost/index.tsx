@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom"
+import {Link, replace, useParams} from "react-router-dom"
 import {Avatar, Tooltip} from "antd"
 
 import type {BlogTypeApiItem, UserTypeApi} from "../../../@types"
@@ -16,7 +16,7 @@ import {
 
 const UserPostBlog = () => {
     const {id, user_id} = useParams()
-    
+
     const {data: user}: UserTypeApi = useQueryHandler({
         pathname: `user/${user_id}`,
         url: `/user/by_id/${user_id}`,
@@ -37,7 +37,10 @@ const UserPostBlog = () => {
                     <div>
                         <div className="flex item-end justify-between">
                             <div className="flex items-center gap-4">
-                                <div className="cursor-pointer">
+                                <Link
+                                    to={`/user/${user_id}`}
+                                    replace
+                                    className="cursor-pointer">
                                     <Tooltip
                                         placement="top"
                                         title={`${user?.name || ""} ${
@@ -49,7 +52,7 @@ const UserPostBlog = () => {
                                             icon={<UserOutlined />}
                                         />
                                     </Tooltip>
-                                </div>
+                                </Link>
                                 <div>
                                     <h2 className="font-bold text-[18px]">
                                         {user?.name} {user?.surname}

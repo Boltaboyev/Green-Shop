@@ -1,5 +1,11 @@
+import {Empty} from "antd"
+
 const Products = () => {
-    return <div>Products</div>
+    return (
+        <div>
+            <Empty />
+        </div>
+    )
 }
 
 export default Products

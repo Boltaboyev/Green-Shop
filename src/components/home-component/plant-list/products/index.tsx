@@ -22,7 +22,7 @@ const Products = () => {
     }: {isLoading: boolean; isError: boolean; data?: CartType[]} =
         useQueryHandler({
             pathname: `flowers-category${category}range_min-${range_min}range_max-${range_max}-sort-${sort}-type-${type}`,
-            url: `/flower/category/${category}`,
+            url: `flower/category/${category}`,
             params: {range_min, range_max, sort, type},
         })
     const {card_loader} = Loader()

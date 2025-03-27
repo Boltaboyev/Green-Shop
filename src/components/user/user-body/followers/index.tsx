@@ -1,5 +1,11 @@
+import {Empty} from "antd"
+
 const Followers = () => {
-    return <div>Followers</div>
+    return (
+        <div>
+            <Empty />
+        </div>
+    )
 }
 
 export default Followers

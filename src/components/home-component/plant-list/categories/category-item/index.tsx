@@ -13,7 +13,7 @@ const CategoryItem = () => {
 
     const {data, isLoading, isError}: QueryType2<CategoryType[]> =
         useQueryHandler({
-            url: "/flower/category",
+            url: "flower/category",
             pathname: "category",
         })
 

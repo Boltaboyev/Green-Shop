@@ -24,6 +24,7 @@ export const useAxios = () => {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
                 ...headers,
+                
             },
             params: {
                 access_token: "64bebc1e2c6d3f056a8c85b7",

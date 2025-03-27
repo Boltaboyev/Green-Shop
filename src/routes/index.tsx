@@ -44,7 +44,7 @@ export const root = createBrowserRouter([
                 element: <PrivateRoute />,
             },
             {
-                path: "/user/:id",
+                path: "/user/:post_user_id",
                 element: <User />,
             },
         ],

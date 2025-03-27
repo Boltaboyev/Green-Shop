@@ -4,10 +4,22 @@ import {
     PlusCircleOutlined,
     SendOutlined,
 } from "@ant-design/icons"
+import {useParams} from "react-router-dom"
+import {useQueryHandler} from "../../../hooks/useQuery"
+import {UserTypeApi} from "../../../@types"
 
 const UserHeader = () => {
     const btn_style =
         "bg-[#46A358] flex rounded-md items-center justify-center gap-2 text-white p-[8px_20px] max-[625px]:p-[5px_15px] max-[625px]:text-[12px]"
+
+    const {post_user_id} = useParams()
+
+    const {data: user}: UserTypeApi = useQueryHandler({
+        pathname: `user/${post_user_id}`,
+        url: `/user/${post_user_id}`,
+    })
+
+    console.log(user)
 
     return (
         <div>
@@ -23,7 +35,8 @@ const UserHeader = () => {
                             <img
                                 className="rounded-full"
                                 src={
-                                    "https://alqadir.edu.pk/wp-content/uploads/2022/09/BS-Islamic-Studies-2022.jpg"
+                                    user?.profile_photo ||
+                                    "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
                                 }
                                 alt=""
                             />
@@ -32,10 +45,11 @@ const UserHeader = () => {
                         <div className="max-[625px]:flex max-[625px]:flex-col max-[625px]:gap-2">
                             <div className="leading-[150%] max-[340px]:text-center">
                                 <h2 className="text-[28px] font-bold max-[900px]:font-medium">
-                                    Name Surname
+                                    {user?.name || "Name"}{" "}
+                                    {user?.surname || "Surname"}
                                 </h2>
                                 <p className="text-[#3d3d3db9] font-medium text-[14px]">
-                                    Followers: 3
+                                    Followers: {user?.followers?.length || 0}
                                 </p>
                             </div>
 

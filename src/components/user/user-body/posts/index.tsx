@@ -1,5 +1,11 @@
+import {Empty} from "antd"
+
 const Posts = () => {
-    return <div>Posts</div>
+    return (
+        <div>
+            <Empty />
+        </div>
+    )
 }
 
 export default Posts

@@ -1,5 +1,11 @@
+import {Empty} from "antd"
+
 const Likes = () => {
-    return <div>Likes</div>
+    return (
+        <div>
+            <Empty />
+        </div>
+    )
 }
 
 export default Likes
