@@ -175,3 +175,11 @@ export interface UserBodyTitleType {
     title: string
     Component: React.FC
 }
+
+export interface PathProfileType {
+    id: number
+    title: string
+    path: string
+    Component: React.FC
+    Icon: React.FC<React.SVGProps<SVGSVGElement>>
+}

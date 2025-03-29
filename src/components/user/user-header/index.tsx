@@ -30,7 +30,7 @@ const UserHeader = () => {
                     alt=""
                 />
                 <div className="w-full flex items-end justify-between gap-5 -translate-y-10 max-[900px]:-translate-y-5">
-                    <div className="flex items-end gap-4 max-[625px]:items-center max-[340px]:flex-col max-[340px]:items-center max-[340px]:justify-center max-[340px]:w-full">
+                    <div className="flex items-end gap-4 max-[625px]:items-center max-[420px]:flex-col max-[420px]:items-center max-[420px]:justify-center max-[420px]:w-full">
                         <div className="w-[150px] h-[150px] border-[5px] max-[625px]:border-2 border-[#46A358] rounded-full flex justify-center max-[900px]:h-[100px] max-[900px]:w-[100px]">
                             <img
                                 className="rounded-full"
@@ -43,7 +43,7 @@ const UserHeader = () => {
                         </div>
 
                         <div className="max-[625px]:flex max-[625px]:flex-col max-[625px]:gap-2">
-                            <div className="leading-[150%] max-[340px]:text-center">
+                            <div className="leading-[150%] max-[420px]:text-center">
                                 <h2 className="text-[28px] font-bold max-[900px]:font-medium">
                                     {user?.name || "Name"}{" "}
                                     {user?.surname || "Surname"}
@@ -62,7 +62,7 @@ const UserHeader = () => {
                                 </button>
 
                                 <button
-                                    className={`${btn_style} order-2 max-[340px]:order-3`}>
+                                    className={`${btn_style} order-2 max-[420px]:order-3`}>
                                     <SendOutlined />
                                     <span className="hidden md:inline">
                                         Send Invitation
@@ -70,7 +70,7 @@ const UserHeader = () => {
                                 </button>
 
                                 <button
-                                    className={`${btn_style} order-3 max-[340px]:order-2`}>
+                                    className={`${btn_style} order-3 max-[420px]:order-2`}>
                                     <PlusCircleOutlined />
                                     <span>Follow</span>
                                 </button>

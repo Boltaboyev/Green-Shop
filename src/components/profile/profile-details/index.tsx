@@ -1,14 +1,27 @@
 import {cookieInfo} from "../../../generic/cookies"
 import {Button, Form, Input, Upload} from "antd"
 import {UploadOutlined} from "@ant-design/icons"
+import {useEditDetails} from "../../../hooks/useQuery/useQueryAction"
 
 const ProfileDetails = () => {
     const {getCookie} = cookieInfo()
     const user = getCookie("user") || {}
 
+    const {mutate} = useEditDetails()
+
+    const updateDetails = (e: any) => {
+        console.log(e.image?.file?.response?.image_url?.url)
+        mutate({
+            ...e,
+            _id: user._id,
+            profile_photo: e.image?.file?.response?.image_url?.url,
+        })
+    }
+
     return (
         <div>
             <Form
+                onFinish={updateDetails}
                 layout="vertical"
                 initialValues={{
                     name: user.name || "",
@@ -58,7 +71,17 @@ const ProfileDetails = () => {
                     </Form.Item>
 
                     <Form.Item name="image" label="Image">
-                        <Upload>
+                        <Upload
+                            name="image"
+                            data={{type: "img"}}
+                            action="https://beckend-n14.onrender.com/api/upload?access_token=64bebc1e2c6d3f056a8c85b7"
+                            listType="picture"
+                            headers={{
+                                Authorization: `Bearer ${localStorage.getItem(
+                                    "token"
+                                )}`,
+                            }}
+                            accept=".png,.jpg,.jpeg">
                             <Button icon={<UploadOutlined />}>Upload</Button>
                         </Upload>
                     </Form.Item>

@@ -189,6 +189,18 @@ const useMakeOrderQuery = () => {
     })
 }
 
+const useEditDetails = () => {
+    const axios = useAxios()
+
+    return useMutation({
+        mutationFn: (data: object) =>
+            axios({url: "user/account-details", method: "POST", body: data}),
+        onSuccess: (data) => {
+            console.log(data)
+        },
+    })
+}
+
 export {
     useLogin,
     useRegister,
@@ -196,4 +208,5 @@ export {
     useLoginWithGoogle,
     useGetCoupon,
     useMakeOrderQuery,
+    useEditDetails,
 }

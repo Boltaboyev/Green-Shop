@@ -1,4 +1,12 @@
-import {HeroSliderType, TitleCategoryType} from "../@types"
+import {HeroSliderType, PathProfileType, TitleCategoryType} from "../@types"
+
+import ProfileAddress from "../components/profile/profile-address"
+import ProfileDetails from "../components/profile/profile-details"
+import TrackProfileOrders from "../components/profile/profile-orders"
+import ProfileProducts from "../components/profile/profile-products"
+import ProfileWishlist from "../components/profile/profile-wishlist"
+
+
 
 export const slider_data: HeroSliderType[] = [
     {
@@ -54,5 +62,49 @@ export const title_category: TitleCategoryType[] = [
         id: 3,
         title: "Sale",
         label: "sale",
+    },
+]
+
+import {LuUserRound} from "react-icons/lu"
+import {HiOutlineShoppingBag} from "react-icons/hi2"
+import {GrLocation} from "react-icons/gr"
+import {LuHeart} from "react-icons/lu"
+import {AiOutlineOrderedList} from "react-icons/ai"
+
+export const path_profile: PathProfileType[] = [
+    {
+        id: 1,
+        path: "",
+        Component: ProfileDetails,
+        Icon: LuUserRound,
+        title: "Account Details",
+    },
+    {
+        id: 2,
+        path: "my-products",
+        Component: ProfileProducts,
+        Icon: HiOutlineShoppingBag,
+        title: "My Products",
+    },
+    {
+        id: 3,
+        path: "address",
+        Component: ProfileAddress,
+        Icon: GrLocation,
+        title: "Address",
+    },
+    {
+        id: 4,
+        path: "wishlist",
+        Component: ProfileWishlist,
+        Icon: LuHeart,
+        title: "Wishlist",
+    },
+    {
+        id: 5,
+        path: "track-order",
+        Component: TrackProfileOrders,
+        Icon: AiOutlineOrderedList,
+        title: "Track Order",
     },
 ]

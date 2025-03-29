@@ -1,4 +1,4 @@
-import {Link, replace, useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import {Avatar, Tooltip} from "antd"
 
 import type {BlogTypeApiItem, UserTypeApi} from "../../../@types"
