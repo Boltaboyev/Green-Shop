@@ -15,6 +15,8 @@ type NotificationType =
     | "shop_not"
     | "like"
     | "unlike"
+    | "follow"
+    | "unfollow"
 
 const notificationApi = () => {
     const notify = (props: NotificationType) => {
@@ -89,6 +91,19 @@ const notificationApi = () => {
                     duration: 1,
                     placement: "top",
                 })
+            case "follow":
+                return notification.success({
+                    message: "You have followed this user.",
+                    duration: 1,
+                    placement: "top",
+                })
+            case "unfollow":
+                return notification.info({
+                    message: "You have unfollowed this user.",
+                    duration: 1,
+                    placement: "top",
+                })
+
             default:
                 break
         }

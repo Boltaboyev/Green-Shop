@@ -1,25 +1,54 @@
-// icons
+import {useState} from "react"
 import {
     MessageOutlined,
+    MinusCircleOutlined,
     PlusCircleOutlined,
     SendOutlined,
 } from "@ant-design/icons"
 import {useParams} from "react-router-dom"
 import {useQueryHandler} from "../../../hooks/useQuery"
-import {UserTypeApi} from "../../../@types"
+import {cookieInfo} from "../../../generic/cookies"
+import {
+    useFollowUser,
+    useUnfollowUser,
+} from "../../../hooks/useQuery/useQueryAction"
 
 const UserHeader = () => {
+    const {mutate: followMutate} = useFollowUser()
+    const {mutate: unfollowMutate} = useUnfollowUser()
+
     const btn_style =
         "bg-[#46A358] flex rounded-md items-center justify-center gap-2 text-white p-[8px_20px] max-[625px]:p-[5px_15px] max-[625px]:text-[12px]"
 
     const {post_user_id} = useParams()
-
-    const {data: user}: UserTypeApi = useQueryHandler({
+    const {data: user} = useQueryHandler({
         pathname: `user/${post_user_id}`,
-        url: `/user/${post_user_id}`,
+        url: `user/${post_user_id}`,
     })
 
-    console.log(user)
+    const {getCookie, setCookie} = cookieInfo()
+    const loggedInUser = getCookie("user") || []
+
+    const [isFollowed, setIsFollowed] = useState(
+        loggedInUser?.following?.includes(user?.id)
+    )
+
+    const follow = () => {
+        const updatedFollowing = [...loggedInUser.following, user.id]
+
+        setIsFollowed(true)
+        setCookie("user", {...loggedInUser, following: updatedFollowing})
+        followMutate({_id: post_user_id!})
+    }
+
+    const unfollow = () => {
+        const updatedFollowing = loggedInUser.following.filter(
+            (id: string) => id !== user.id
+        )
+        setIsFollowed(false)
+        setCookie("user", {...loggedInUser, following: updatedFollowing})
+        unfollowMutate({_id: post_user_id!})
+    }
 
     return (
         <div>
@@ -27,7 +56,7 @@ const UserHeader = () => {
                 <img
                     className="w-full h-[320px] rounded-xl max-[900px]:h-[210px] max-[625px]:hidden"
                     src="https://i0.wp.com/linkedinheaders.com/wp-content/uploads/2018/02/mountain-lake-header.jpg?fit=1584%2C396&ssl=1"
-                    alt=""
+                    alt="Cover"
                 />
                 <div className="w-full flex items-end justify-between gap-5 -translate-y-10 max-[900px]:-translate-y-5">
                     <div className="flex items-end gap-4 max-[625px]:items-center max-[420px]:flex-col max-[420px]:items-center max-[420px]:justify-center max-[420px]:w-full">
@@ -38,7 +67,7 @@ const UserHeader = () => {
                                     user?.profile_photo ||
                                     "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"
                                 }
-                                alt=""
+                                alt="Profile"
                             />
                         </div>
 
@@ -69,16 +98,26 @@ const UserHeader = () => {
                                     </span>
                                 </button>
 
-                                <button
-                                    className={`${btn_style} order-3 max-[420px]:order-2`}>
-                                    <PlusCircleOutlined />
-                                    <span>Follow</span>
-                                </button>
+                                {isFollowed ? (
+                                    <button
+                                        className={`${btn_style} order-3 max-[420px]:order-2`}>
+                                        <MinusCircleOutlined />
+
+                                        <span>Unfollow</span>
+                                    </button>
+                                ) : (
+                                    <button
+                                        className={`${btn_style} order-3 max-[420px]:order-2`}>
+                                        <PlusCircleOutlined />
+                                        <span>Follow</span>
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
+
                     <div className="flex gap-4 max-[625px]:hidden">
-                        <button className={`${btn_style} `}>
+                        <button className={`${btn_style}`}>
                             <MessageOutlined />
                             <span className="max-[900px]:hidden">
                                 Start chat
@@ -91,10 +130,22 @@ const UserHeader = () => {
                             </span>
                         </button>
 
-                        <button className={`${btn_style}`}>
-                            <PlusCircleOutlined />
-                            <span>Follow</span>
-                        </button>
+                        {isFollowed ? (
+                            <button
+                                onClick={unfollow}
+                                className={`${btn_style} order-3 max-[420px]:order-2`}>
+                                <MinusCircleOutlined />
+
+                                <span>Unfollow</span>
+                            </button>
+                        ) : (
+                            <button
+                                onClick={follow}
+                                className={`${btn_style} order-3 max-[420px]:order-2`}>
+                                <PlusCircleOutlined />
+                                <span>Follow</span>
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

@@ -40,7 +40,7 @@ const BlogCard: FC<BlogType> = ({
                     <h2
                         onClick={() => {
                             axios({
-                                url: "/user/blog/view",
+                                url: "user/blog/view",
                                 method: "PUT",
                                 body: {_id},
                             })

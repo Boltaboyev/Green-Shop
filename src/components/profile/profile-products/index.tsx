@@ -12,7 +12,7 @@ const ProfileProducts = () => {
     }: {isLoading: boolean; isError: boolean; data?: CartType[]} =
         useQueryHandler({
             pathname: "myProducts",
-            url: "/user/products",
+            url: "user/products",
         })
 
     return (

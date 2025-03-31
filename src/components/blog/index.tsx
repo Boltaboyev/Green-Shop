@@ -15,7 +15,7 @@ const BlogComponent = () => {
 
     const {data, isError, isLoading}: BlogTypeApi = useQueryHandler({
         pathname: `blog?search=${getParam("search")}`,
-        url: "/user/blog",
+        url: "user/blog",
         params: {
             search: getParam("search") || "",
         },
@@ -32,7 +32,10 @@ const BlogComponent = () => {
                     {isLoading || isError
                         ? blog_loader()
                         : data?.map((value) => (
-                              <BlogCard key={value._id} {...value} />
+                              <BlogCard
+                                  key={value?._id || Date.now()}
+                                  {...value}
+                              />
                           ))}
                 </div>
             </div>

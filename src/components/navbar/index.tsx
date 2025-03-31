@@ -18,7 +18,7 @@ const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
     const {getCookie} = cookieInfo()
-    let user = getCookie("user")
+    const user = getCookie("user")
 
     const {shop} = useReduxSelector((state) => state.shopSlice)
 

@@ -19,11 +19,11 @@ const UserPostBlog = () => {
 
     const {data: user}: UserTypeApi = useQueryHandler({
         pathname: `user/${user_id}`,
-        url: `/user/by_id/${user_id}`,
+        url: `user/by_id/${user_id}`,
     })
     const {data, isLoading}: BlogTypeApiItem = useQueryHandler({
         pathname: `blog/${id}`,
-        url: `/user/blog/${id}`,
+        url: `user/blog/${id}`,
     })
 
     const {blog_userPostLoader} = Loader()

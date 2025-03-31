@@ -9,7 +9,7 @@ import Likes from "./likes"
 import Followers from "./followers"
 
 const UserBody = () => {
-    let user_body_title: UserBodyTitleType[] = [
+    const user_body_title: UserBodyTitleType[] = [
         {
             id: "1",
             title: "About",

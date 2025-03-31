@@ -23,7 +23,7 @@ const useLogin = () => {
         mutationFn: ({data}: {data: object}) =>
             axios({url: "user/sign-in", body: data, method: "POST"}),
         onSuccess: (data) => {
-            let {token, user} = data.data
+            const {token, user} = data.data
             localStorage.setItem("token", token)
             setCookie("user", user)
             dispatch(
@@ -54,7 +54,7 @@ const useRegister = () => {
         mutationFn: ({data}: {data: object}) =>
             axios({url: "user/sign-up/", method: "POST", body: data}),
         onSuccess: (data) => {
-            let {token, user} = data.data
+            const {token, user} = data.data
             localStorage.setItem("token", token)
             setCookie("user", user)
             dispatch(
@@ -92,7 +92,7 @@ const useLoginWithGoogle = () => {
             })
         },
         onSuccess: (data) => {
-            let {token, user} = data.data
+            const {token, user} = data.data
             localStorage.setItem("token", token)
             setCookie("user", user)
             dispatch(
@@ -129,7 +129,7 @@ const useRegisterWithGoogle = () => {
             })
         },
         onSuccess: (data) => {
-            let {token, user} = data.data
+            const {token, user} = data.data
             localStorage.setItem("token", token)
             setCookie("user", user)
 
@@ -233,6 +233,42 @@ export const useDeleteIsLiked = () => {
         },
         onSuccess: () => {
             notify("unlike")
+        },
+    })
+}
+
+export const useFollowUser = () => {
+    const axios = useAxios()
+    const notify = notificationApi()
+
+    return useMutation({
+        mutationFn: (data: {_id: string}) => {
+            return axios({
+                url: "user/follow",
+                method: "POST",
+                body: data,
+            })
+        },
+        onSuccess: () => {
+            notify("follow")
+        },
+    })
+}
+
+export const useUnfollowUser = () => {
+    const axios = useAxios()
+    const notify = notificationApi()
+
+    return useMutation({
+        mutationFn: (data: {_id: string}) => {
+            return axios({
+                url: "user/unfollow",
+                method: "POST",
+                body: data,
+            })
+        },
+        onSuccess: () => {
+            notify("unfollow")
         },
     })
 }

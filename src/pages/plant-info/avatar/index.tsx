@@ -5,7 +5,7 @@ import {useQueryHandler} from "../../../hooks/useQuery"
 const AvatarItem = ({created_by}: {created_by: string}) => {
     const {data} = useQueryHandler({
         pathname: "user",
-        url: `/user/by_id/${created_by}`,
+        url: `user/by_id/${created_by}`,
     })
 
     return (
