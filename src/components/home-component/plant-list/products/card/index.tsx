@@ -1,19 +1,67 @@
-import type {FC} from "react"
+import {useState, type FC} from "react"
 import {useNavigate} from "react-router-dom"
 
-import type {CartType} from "../../../../../@types"
+import type {AuthUser2, CartType, WishlistItem} from "../../../../../@types"
 import {useReduxDispatch} from "../../../../../hooks/useRedux"
 import {getProductShop} from "../../../../../redux/shop-slice"
 
 // icons
-import {HeartOutlined, ShoppingCartOutlined} from "@ant-design/icons"
+import {
+    HeartFilled,
+    HeartOutlined,
+    ShoppingCartOutlined,
+} from "@ant-design/icons"
 import {FiSearch} from "react-icons/fi"
 import {notificationApi} from "../../../../../generic/notification"
+import {cookieInfo} from "../../../../../generic/cookies"
+import {
+    useDeleteIsLiked,
+    useIsLiked,
+} from "../../../../../hooks/useQuery/useQueryAction"
 
 const Card: FC<CartType> = (props) => {
     const navigate = useNavigate()
     const dispatch = useReduxDispatch()
     const notify = notificationApi()
+
+    const {mutate} = useIsLiked()
+    const {mutate: unlike} = useDeleteIsLiked()
+
+    const {getCookie, setCookie} = cookieInfo()
+    let user: AuthUser2 = getCookie("user")
+
+    const [wishlist, setWishlist] = useState<WishlistItem[]>(
+        user?.wishlist || []
+    )
+
+    const isLiked = wishlist.some((item) => item.flower_id === props._id)
+
+    const isLike = () => {
+        user = {
+            ...user,
+            wishlist: [
+                ...(user.wishlist as WishlistItem[]),
+                {route_path: props.category, flower_id: props._id},
+            ],
+        }
+
+        setWishlist(user.wishlist!)
+        setCookie("user", user)
+        mutate({route_path: props.category, flower_id: props._id})
+    }
+
+    const disLike = () => {
+        user = {
+            ...user,
+            wishlist: user.wishlist?.filter(
+                (value) => value.flower_id !== props._id
+            ),
+        }
+
+        setWishlist(user.wishlist!)
+        setCookie("user", user)
+        unlike({_id: props._id})
+    }
 
     return (
         <div className="flex flex-col gap-[0.6rem] max-[350px]:border max-[350px]:p-[15px] border-t border-transparent hover:border-[#46A358] rounded-lg max-[350px]:border-[#399e3973]">
@@ -34,9 +82,15 @@ const Card: FC<CartType> = (props) => {
                         <ShoppingCartOutlined />
                     </button>
 
-                    <button>
-                        <HeartOutlined />
-                    </button>
+                    {isLiked ? (
+                        <button onClick={disLike}>
+                            <HeartFilled className="!text-[#46a358]" />
+                        </button>
+                    ) : (
+                        <button onClick={isLike}>
+                            <HeartOutlined />
+                        </button>
+                    )}
 
                     <button
                         onClick={() =>

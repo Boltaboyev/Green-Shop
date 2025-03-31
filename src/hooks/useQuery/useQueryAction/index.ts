@@ -201,6 +201,42 @@ const useEditDetails = () => {
     })
 }
 
+export const useIsLiked = () => {
+    const axios = useAxios()
+    const notify = notificationApi()
+
+    return useMutation({
+        mutationFn: (data: object) => {
+            return axios({
+                url: "user/create-wishlist",
+                method: "POST",
+                body: data,
+            })
+        },
+        onSuccess: () => {
+            notify("like")
+        },
+    })
+}
+
+export const useDeleteIsLiked = () => {
+    const axios = useAxios()
+    const notify = notificationApi()
+
+    return useMutation({
+        mutationFn: (data: {_id: string}) => {
+            return axios({
+                url: "user/delete-wishlist",
+                method: "DELETE",
+                body: data,
+            })
+        },
+        onSuccess: () => {
+            notify("unlike")
+        },
+    })
+}
+
 export {
     useLogin,
     useRegister,

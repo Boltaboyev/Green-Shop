@@ -86,6 +86,31 @@ export interface CouponType {
     title: string
 }
 
+export interface WishlistItem {
+    route_path: string
+    flower_id: string
+}
+
+export interface AuthUser2 {
+    _id?: string
+    email?: string
+    name?: string
+    surname?: string
+    profile_photo?: string
+    create_account_limit?: number
+    phone_number?: string
+    wishlist?: WishlistItem[]
+    username?: string
+    billing_address?: any
+    followers?: string[]
+    permission?: {
+        create: boolean
+        update: boolean
+        delete: boolean
+        read: boolean
+    }
+}
+
 export interface AuthUser<T> {
     _id?: string
     email?: string

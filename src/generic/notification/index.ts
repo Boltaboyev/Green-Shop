@@ -13,6 +13,8 @@ type NotificationType =
     | "add"
     | "delete"
     | "shop_not"
+    | "like"
+    | "unlike"
 
 const notificationApi = () => {
     const notify = (props: NotificationType) => {
@@ -75,6 +77,18 @@ const notificationApi = () => {
                 })
             case "shop_not":
                 return notification.error({message: "Please place an order !"})
+            case "like":
+                return notification.success({
+                    message: "Product added to wishlist",
+                    duration: 1,
+                    placement: "top",
+                })
+            case "unlike":
+                return notification.info({
+                    message: "Product removed from wishlist",
+                    duration: 1,
+                    placement: "top",
+                })
             default:
                 break
         }
