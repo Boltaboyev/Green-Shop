@@ -26,7 +26,7 @@ const Likes = () => {
         )
     }
 
-    const newArr: any[] = []
+    let newArr: any[] = []
 
     data?.forEach((value) => {
         if (value && !newArr.some((item) => item?._id === value?._id)) {
