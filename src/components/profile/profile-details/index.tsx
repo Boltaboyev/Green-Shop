@@ -4,16 +4,25 @@ import {UploadOutlined} from "@ant-design/icons"
 import {useEditDetails} from "../../../hooks/useQuery/useQueryAction"
 
 const ProfileDetails = () => {
-    const {getCookie} = cookieInfo()
+    const {setCookie, getCookie} = cookieInfo()
     const user = getCookie("user") || {}
 
     const {mutate} = useEditDetails()
 
     const updateDetails = (e: any) => {
-        console.log(e.image?.file?.response?.image_url?.url)
         mutate({
             ...e,
             _id: user._id,
+            profile_photo: e.image?.file?.response?.image_url?.url,
+        })
+
+        setCookie("user", {
+            ...user,
+            name: e.name,
+            surname: e.surname,
+            email: e.email,
+            phone_number: e.phone_number,
+            username: e.username,
             profile_photo: e.image?.file?.response?.image_url?.url,
         })
     }
@@ -25,11 +34,11 @@ const ProfileDetails = () => {
                 layout="vertical"
                 initialValues={{
                     name: user.name || "",
-                    last_name: user.surname || "",
+                    surname: user.surname || "",
                     email: user.email || "",
-                    number: user.number || "",
+                    phone_number: user.phone_number || "",
                     username: user.username || "",
-                    image: user.image ? [{url: user.image}] : [],
+                    profile_photo: user.image ? [{url: user.image}] : [],
                 }}>
                 <div className="grid grid-cols-2 gap-[0_30px]">
                     <Form.Item
@@ -40,7 +49,7 @@ const ProfileDetails = () => {
                     </Form.Item>
 
                     <Form.Item
-                        name="last_name"
+                        name="surname"
                         label="Last name"
                         rules={[{required: true}]}>
                         <Input placeholder="Enter your last name..." />
@@ -54,7 +63,7 @@ const ProfileDetails = () => {
                     </Form.Item>
 
                     <Form.Item
-                        name="number"
+                        name="phone_number"
                         label="Phone number"
                         rules={[{required: true}]}>
                         <Input
@@ -70,7 +79,10 @@ const ProfileDetails = () => {
                         <Input placeholder="Enter your username ..." />
                     </Form.Item>
 
-                    <Form.Item name="image" label="Image">
+                    <Form.Item
+                        name="image"
+                        label="Image"
+                        rules={[{required: true}]}>
                         <Upload
                             name="image"
                             data={{type: "img"}}

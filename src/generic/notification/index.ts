@@ -17,6 +17,10 @@ type NotificationType =
     | "unlike"
     | "follow"
     | "unfollow"
+    | "editProfile"
+    | "errorEditProfile"
+    | "editAddress"
+    | "errorEditAddress"
 
 const notificationApi = () => {
     const notify = (props: NotificationType) => {
@@ -100,6 +104,31 @@ const notificationApi = () => {
             case "unfollow":
                 return notification.info({
                     message: "You have unfollowed this user.",
+                    duration: 1,
+                    placement: "top",
+                })
+            case "editProfile":
+                return notification.success({
+                    message: "Profile updated successfully",
+                    duration: 1,
+                    placement: "top",
+                })
+            case "errorEditProfile":
+                return notification.error({
+                    message: "Profile update failed !",
+                    duration: 1,
+                    placement: "top",
+                })
+
+            case "editAddress":
+                return notification.success({
+                    message: "Address updated successfully",
+                    duration: 1,
+                    placement: "top",
+                })
+            case "errorEditAddress":
+                return notification.error({
+                    message: "Address update failed !",
                     duration: 1,
                     placement: "top",
                 })

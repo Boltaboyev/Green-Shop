@@ -21,6 +21,7 @@ const OrderModal = () => {
 
     return (
         <Modal
+            centered={true}
             className="!w-[650px]"
             title={"Order Confirmation"}
             footer={false}

@@ -12,6 +12,7 @@ import {signWithGoogle} from "../../../config"
 import {cookieInfo} from "../../../generic/cookies"
 import {setCoupon, setIsLoading} from "../../../redux/coupon-slice"
 import {CouponType} from "../../../@types"
+import {message, notification} from "antd"
 
 const useLogin = () => {
     const dispatch = useDispatch()
@@ -155,7 +156,7 @@ const useGetCoupon = () => {
         mutationFn: (data: object) => {
             dispatch(setIsLoading(true))
             return axios({
-                url: "/features/coupon",
+                url: "features/coupon",
                 params: data,
             })
         },
@@ -191,12 +192,38 @@ const useMakeOrderQuery = () => {
 
 const useEditDetails = () => {
     const axios = useAxios()
+    const notify = notificationApi()
 
     return useMutation({
-        mutationFn: (data: object) =>
-            axios({url: "user/account-details", method: "POST", body: data}),
-        onSuccess: (data) => {
-            console.log(data)
+        mutationFn: (data: object) => {
+            return axios({
+                url: "user/account-details",
+                method: "POST",
+                body: data,
+            })
+        },
+        onSuccess: () => {
+            notify("editProfile")
+        },
+        onError: () => {
+            notify("errorEditProfile")
+        },
+    })
+}
+
+export const useEditAddress = () => {
+    const axios = useAxios()
+    const notify = notificationApi()
+
+    return useMutation({
+        mutationFn: (data: object) => {
+            return axios({url: "user/address", method: "POST", body: data})
+        },
+        onSuccess: () => {
+            notify("editAddress")
+        },
+        onError: () => {
+            notify("errorEditAddress")
         },
     })
 }

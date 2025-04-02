@@ -1,17 +1,43 @@
 import {Form, Input} from "antd"
 import {cookieInfo} from "../../../generic/cookies"
+import {useEditAddress} from "../../../hooks/useQuery/useQueryAction"
 
 const ProfileAddress = () => {
-    const {getCookie} = cookieInfo()
+    const {getCookie, setCookie} = cookieInfo()
     const auth = getCookie("user") || {}
+
+    const {mutate} = useEditAddress()
+
+    const updateAddress = (e: any) => {
+        mutate({
+            ...e,
+            _id: auth._id,
+            name: auth.name,
+            surname: auth.surname,
+            phone_number: auth.phone_number,
+            email: auth.email,
+        })
+
+        setCookie("user", {
+            ...auth,
+            billing_address: {
+                country: e.country,
+                town: e.town,
+                street_address: e.street_address,
+                additional_street_address: e.additional_street_address,
+                state: e.state,
+                zip: e.zip,
+            },
+        })
+    }
+
     return (
         <div>
             <Form
                 className="grid grid-cols-2 gap-[0_25px]"
                 layout="vertical"
+                onFinish={updateAddress}
                 fields={[
-                    {name: ["name"], value: auth?.name},
-                    {name: ["surname"], value: auth?.surname},
                     {name: ["country"], value: auth?.billing_address?.country},
                     {name: ["town"], value: auth?.billing_address?.town},
                     {
@@ -24,31 +50,7 @@ const ProfileAddress = () => {
                     },
                     {name: ["state"], value: auth?.billing_address?.state},
                     {name: ["zip"], value: auth?.billing_address?.zip},
-                    {name: ["email"], value: auth?.email},
-                    {name: ["phone_number"], value: auth?.phone_number},
                 ]}>
-                <Form.Item
-                    name="name"
-                    label="First name"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter First name",
-                        },
-                    ]}>
-                    <Input placeholder="Type your first name..." />
-                </Form.Item>
-                <Form.Item
-                    name="surname"
-                    label="Last name"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter Last name",
-                        },
-                    ]}>
-                    <Input placeholder="Type your last name..." />
-                </Form.Item>
                 <Form.Item
                     name="country"
                     label="Country / Region"
@@ -119,31 +121,7 @@ const ProfileAddress = () => {
                     ]}>
                     <Input placeholder="Type your Extra zip..." />
                 </Form.Item>
-                <Form.Item
-                    name="email"
-                    label="Email address"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter  email...",
-                        },
-                    ]}>
-                    <Input placeholder="Type your email..." />
-                </Form.Item>
-                <Form.Item
-                    name="phone_number"
-                    label="Phone number"
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please enter phone number",
-                        },
-                    ]}>
-                    <Input
-                        addonBefore={"+998"}
-                        placeholder="Type your phone number..."
-                    />
-                </Form.Item>
+
                 <button
                     type="submit"
                     className="text-white bg-[#46a358] rounded-md p-[10px_20px] mt-4">

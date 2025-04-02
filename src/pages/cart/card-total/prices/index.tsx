@@ -2,7 +2,7 @@ import {useReduxSelector} from "../../../../hooks/useRedux"
 
 const PricesTotal = () => {
     const {shop} = useReduxSelector((state) => state.shopSlice)
-    const {coupon} = useReduxSelector((state) => state.couponSlice)
+    let {coupon} = useReduxSelector((state) => state.couponSlice)
     const total_price = shop.reduce(
         (acc, value) => (acc += Number(value.userPrice)),
         0
