@@ -12,7 +12,6 @@ import {signWithGoogle} from "../../../config"
 import {cookieInfo} from "../../../generic/cookies"
 import {setCoupon, setIsLoading} from "../../../redux/coupon-slice"
 import {CouponType} from "../../../@types"
-import {message, notification} from "antd"
 
 const useLogin = () => {
     const dispatch = useDispatch()
