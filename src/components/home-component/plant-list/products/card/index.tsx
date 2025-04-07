@@ -84,7 +84,7 @@ const Card: FC<CartType> = (props) => {
 
                     {isLiked ? (
                         <button onClick={disLike}>
-                            <HeartFilled className="!text-[#46a358]" />
+                            <HeartFilled className="!text-red-500" />
                         </button>
                     ) : (
                         <button onClick={isLike}>
