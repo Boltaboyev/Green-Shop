@@ -11,7 +11,7 @@ const TrackProfileOrders = () => {
     }: {data?: OrderType[]; isLoading: boolean; isError: boolean} =
         useQueryHandler({
             pathname: "order",
-            url: "/order/get-order",
+            url: "order/get-order",
         })
 
     const filteredOrders = data ? data.slice(1, 15) : []

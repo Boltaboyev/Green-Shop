@@ -43,6 +43,8 @@ const Card: FC<CartType> = (props) => {
                     loading: false,
                 })
             )
+        } else {
+            isLike()
         }
     }
 
@@ -52,7 +54,7 @@ const Card: FC<CartType> = (props) => {
         user = {
             ...user,
             wishlist: [
-                ...(user.wishlist as WishlistItem[]),
+                ...(user?.wishlist as WishlistItem[]),
                 {route_path: props.category, flower_id: props._id},
             ],
         }
@@ -101,7 +103,6 @@ const Card: FC<CartType> = (props) => {
                     ) : (
                         <button
                             onClick={() => {
-                                isLike()
                                 likeCheckUser()
                             }}>
                             <HeartOutlined />
