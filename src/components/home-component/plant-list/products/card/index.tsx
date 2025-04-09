@@ -18,6 +18,7 @@ import {
     useDeleteIsLiked,
     useIsLiked,
 } from "../../../../../hooks/useQuery/useQueryAction"
+import {setAuthorizationModalVisibility} from "../../../../../redux/modal-slice"
 
 const Card: FC<CartType> = (props) => {
     const navigate = useNavigate()
@@ -33,6 +34,17 @@ const Card: FC<CartType> = (props) => {
     const [wishlist, setWishlist] = useState<WishlistItem[]>(
         user?.wishlist || []
     )
+
+    const likeCheckUser = () => {
+        if (!user) {
+            dispatch(
+                setAuthorizationModalVisibility({
+                    open: true,
+                    loading: false,
+                })
+            )
+        }
+    }
 
     const isLiked = wishlist.some((item) => item.flower_id === props._id)
 
@@ -87,7 +99,11 @@ const Card: FC<CartType> = (props) => {
                             <HeartFilled className="!text-red-500" />
                         </button>
                     ) : (
-                        <button onClick={isLike}>
+                        <button
+                            onClick={() => {
+                                isLike()
+                                likeCheckUser()
+                            }}>
                             <HeartOutlined />
                         </button>
                     )}

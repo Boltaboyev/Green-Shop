@@ -178,7 +178,7 @@ const useMakeOrderQuery = () => {
         mutationFn: (data: object) => {
             dispatch(setOrderModalVisibility({open: false, isLoading: true}))
             return axios({
-                url: "/order/make-order",
+                url: "order/make-order",
                 method: "POST",
                 body: {...data},
             })

@@ -17,7 +17,7 @@ const PlantInfo = () => {
     const {category, id}: ParamsType = useParams()
     const {data, isError, isLoading}: QueryType = useQueryHandler({
         pathname: "id_card",
-        url: `/flower/category/${category}/${id}`,
+        url: `flower/category/${category}/${id}`,
     })
 
     const navigate = useNavigate()
